@@ -1,6 +1,6 @@
 version: '3.3'
 services:
-  Contract_assurance:
+  book_rec:
     image: book_rec:v1
     command : >
       sh -c "cd /app && cd ca/db_migration && alembic upgrade head && cd ../../ &&
@@ -13,7 +13,7 @@ services:
       - db
       - redis
     networks:
-      - contract_assurance
+      - book_rec
       
   db:
     image: "postgres:${POSTGRES_VERSION}"
@@ -27,10 +27,10 @@ services:
     ports:
       - "${DB_EXTERNAL_PORT}:${DB_INTERNAL_PORT}"
     networks:
-      - contract_assurance
+      - book_rec
 
 volumes:
   pgdata:
 networks:
-  contract_assurance:
+  book_rec:
     driver: bridge
