@@ -6,7 +6,7 @@ services:
       sh -c "cd /app && cd ca/db_migration && alembic upgrade head && cd ../../ &&
              uvicorn book_summarizer.api.main:app --port ${BOOK_REC_INTERNAL_PORT} --host 0.0.0.0 --reload"
     env_file:
-      - .ca.env
+      - book_rec.env
     ports:
       - "${BOOK_REC_EXTERNAL_PORT}:${BOOK_REC_INTERNAL_PORT}"
     depends_on:
