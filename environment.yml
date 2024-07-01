@@ -1,0 +1,11 @@
+name: book_rec
+channels:
+    - conda-forge
+dependencies:
+    - python~=3.11.0
+    - setuptools
+    - wheel
+    - pip
+    - pip:
+      - poetry
+      - poetry-plugin-export

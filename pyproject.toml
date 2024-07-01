@@ -1,0 +1,86 @@
+[tool.poetry]
+name = "book_rec"
+version = "0.1.0"
+description = "book managerment system"
+authors = ["Vishal"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "~3.11.0"
+langchain = "0.0.153"
+fastapi = "0.99.1"
+requests = "2.31.0"
+redis = "4.6.0"
+minio = "7.2.3"
+SQLAlchemy = "2.0.20"
+typing-inspect = "0.9.0"
+pydantic = "1.10.12"
+pydantic_core = "2.6.3"
+fastapi-pagination = "0.12.14"
+pandas = "2.1.0"
+passlib = "1.7.4"
+psycopg2-binary = "2.9.9"
+gunicorn = "21.2.0"
+absl-py = "2.1.0"
+regex = "2023.8.8"
+PyMuPDF = "1.23.18"
+nltk = "3.8.1"
+httpx = "0.26.0"
+python-multipart = "0.0.6"
+
+[tool.poetry.group.dev.dependencies]
+yapf = "~0.40.2"
+isort = "~5.12.0"
+pylint = "~3.0.2"
+mypy = "~1.7.0"
+bandit = "~1.7.5"
+pycodestyle = "~2.11.1"
+docformatter = "~1.7.5"
+pyupgrade = "~3.15.0"
+types-pyyaml = "6.0.12.12"
+yamllint = "~1.33.0"
+
+
+[tool.poetry.group.test.dependencies]
+pytest = "~7.4.3"
+pytest-cov = "~4.1.0"
+coverage = "~7.3.2"
+pytest-xdist = "~3.4.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.isort]
+atomic = true
+profile = "google"
+line_length = 101
+skip_gitignore = true
+
+[tool.yapf]
+based_on_style = "pep8"
+indent_width = 2
+column_limit = 101
+blank_line_before_nested_class_or_def = true
+space_between_ending_comma_and_closing_bracket = false
+spaces_before_comment = 1
+
+[tool.mypy]
+# Non annotated code is an error and use strict settings
+check_untyped_defs = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+strict_optional = true
+
+# Follow imports, but don't report errors in imports.
+follow_imports = "silent"
+ignore_missing_imports = true
+
+[tool.bandit]
+exclude_dirs = ["tests", "test", "tools"]
+tests = []
+skips = []

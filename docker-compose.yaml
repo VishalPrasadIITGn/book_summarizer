@@ -1,0 +1,36 @@
+version: '3.3'
+services:
+  Contract_assurance:
+    image: book_rec:v1
+    command : >
+      sh -c "cd /app && cd ca/db_migration && alembic upgrade head && cd ../../ &&
+             uvicorn book_summarizer.api.main:app --port ${BOOK_REC_INTERNAL_PORT} --host 0.0.0.0 --reload"
+    env_file:
+      - .ca.env
+    ports:
+      - "${BOOK_REC_EXTERNAL_PORT}:${BOOK_REC_INTERNAL_PORT}"
+    depends_on:
+      - db
+      - redis
+    networks:
+      - contract_assurance
+      
+  db:
+    image: "postgres:${POSTGRES_VERSION}"
+    restart: always
+    env_file:
+      - .ca.env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    expose:
+      - "${DB_EXTERNAL_PORT}"
+    ports:
+      - "${DB_EXTERNAL_PORT}:${DB_INTERNAL_PORT}"
+    networks:
+      - contract_assurance
+
+volumes:
+  pgdata:
+networks:
+  contract_assurance:
+    driver: bridge
